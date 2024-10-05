@@ -1,4 +1,4 @@
-import { Conta } from "./Contas"
+import { Conta } from "./contas"
 
 export class Comunidade{
     titulo: string
@@ -27,12 +27,8 @@ export class Comunidade{
 export class SubComunidade extends Comunidade {
     Comunidade_Mae: Comunidade
 
-    constructor(titulo_Comunidade: string, descricao_comunidade: string, seguidores_da_comunidade: Array<Conta>, Classe_de_Origem: Comunidades){
+    constructor(titulo_Comunidade: string, descricao_comunidade: string, Classe_de_Origem: Comunidade, seguidores_da_comunidade: Array<Conta>){
         super(titulo_Comunidade, descricao_comunidade, seguidores_da_comunidade)
         this.Comunidade_Mae = Classe_de_Origem
     }
 }
-
-let autismo = new Comunidade("Autismo", "Comunidade dedicada ao autismo", [])
-
-let hiperfoco = new SubComunidade("Hiperfoco", "Nova subcomunidade feita para conversas e discussões dedicadas ao  hiperfoco do autismo", [], autismo)
