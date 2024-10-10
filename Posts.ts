@@ -1,4 +1,4 @@
-import { Conta } from "./Contas"
+import { Contas } from "./Contas"
 
 export class Post{
     private nomeUsuario: string
@@ -35,7 +35,7 @@ export class Post{
         this.curtidas.push(curtida)
     }
 
-    public removerCurtida(contaLogada: Conta): void{
+    public removerCurtida(contaLogada: Contas): void{
         for(let curtida of this.curtidas){
             if(curtida.getNomeUsuario() === contaLogada.GetNomeUsuario()){
                 this.curtidas.splice(this.curtidas.indexOf(curtida), 1)
