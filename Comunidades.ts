@@ -1,11 +1,11 @@
-import { Conta } from "./Contas"
+import { Contas } from "./contas"
 
 export class Comunidade{
     titulo: string
     descricao: string
-    seguidores: Array<Conta>
+    seguidores: Array<Contas>
 
-    constructor(titulo_Comunidade: string, descricao_comunidade: string, seguidores_da_comunidade: Array<Conta>){
+    constructor(titulo_Comunidade: string, descricao_comunidade: string, seguidores_da_comunidade: Array<Contas>){
         this.titulo = titulo_Comunidade
         this.descricao = descricao_comunidade
         this.seguidores = seguidores_da_comunidade
@@ -19,16 +19,19 @@ export class Comunidade{
         return this.descricao
     }
 
-    GetSeguidores(): Conta[]{
+    GetSeguidores(): Contas[]{
         return this.seguidores
     }
 }
 
 export class SubComunidade extends Comunidade {
     Comunidade_Mae: Comunidade
+    comunidade_Adulta: boolean
 
-    constructor(titulo_Comunidade: string, descricao_comunidade: string, Classe_de_Origem: Comunidade, seguidores_da_comunidade: Array<Conta>){
+    constructor(titulo_Comunidade: string, descricao_comunidade: string,comunidade_para_maiores_de_18: boolean, Classe_de_Origem: Comunidade, seguidores_da_comunidade: Array<Contas>){
         super(titulo_Comunidade, descricao_comunidade, seguidores_da_comunidade)
         this.Comunidade_Mae = Classe_de_Origem
+        this.comunidade_Adulta = comunidade_para_maiores_de_18
     }
 }
+
