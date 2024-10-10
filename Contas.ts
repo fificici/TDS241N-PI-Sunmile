@@ -1,18 +1,20 @@
 let leitor = require("readline-sync")
 
-export class Conta {
+export class Contas {
     nome: string
     descricao: string
-    idade: number
-    seguindo: Array<Conta>
+    dataNascimento: Date
+    seguindo: Array<Contas>
+    seguidores: Array<Contas>
     inscricoes: Array<any>
     linguaPrincipal: string
 
-    constructor(nomedePerfil: string, descricaoConta: string, idadeusuario: number, seguindo: Array<Conta>, inscricoes: Array<any>, lingua_principal: string){
+    constructor(nomedePerfil: string, descricaoConta: string, idadeusuario: Date, seguindo: Array<Contas>, seguidores: Array<Contas>, inscricoes: Array<any>, lingua_principal: string){
         this.nome = nomedePerfil
         this.descricao = descricaoConta
-        this.idade = idadeusuario
+        this.dataNascimento = idadeusuario
         this.seguindo = seguindo
+        this.seguidores = seguidores
         this.inscricoes = inscricoes
         this.linguaPrincipal = lingua_principal
     }
@@ -25,15 +27,19 @@ export class Conta {
         return this.descricao
     }
 
-    GetIdade(): number{
-        return this.idade
+    GetIdade(): Date{
+        return this.dataNascimento
     }
 
-    GetSeguindo(): Conta[]{
+    GetSeguindo(): Contas[]{
         return this.seguindo
     }
 
-    GetIncricoes(): Conta[] {
+    GetSeguidores(): Contas[]{
+        return this.seguidores
+    }
+
+    GetIncricoes(): Contas[] {
         return this.inscricoes
     }
 
@@ -41,10 +47,10 @@ export class Conta {
         return this.linguaPrincipal
     }
 
-    SetConta(nomedePerfil: string, descricaoConta: string, idadeusuario: number, lingua_principal: string): void{
+    SetConta(nomedePerfil: string, descricaoConta: string, idadeusuario: Date, lingua_principal: string): void{
         this.nome = nomedePerfil
         this.descricao = descricaoConta
-        this.idade = idadeusuario
+        this.dataNascimento = idadeusuario
         this.linguaPrincipal = lingua_principal
     }
 
