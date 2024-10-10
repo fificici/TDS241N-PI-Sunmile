@@ -1,4 +1,4 @@
-import { Conta } from "./contas"
+import { Conta } from "./Contas"
 
 export class Comunidade{
     titulo: string
