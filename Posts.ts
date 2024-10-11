@@ -1,87 +1,84 @@
-import { Contas } from "./Contas"
+let leitor = require("readline-sync")
+import { Comunidade } from "./comunidades"
+import { SubComunidade } from "./comunidades"
+import { Post } from "./posts"
 
-export class Post{
-    private nomeUsuario: string
-    private conteudo: string
-    private comentarios: Array<Comentario>
-    private curtidas: Array<Curtida>
-    private dataHora: Date
+export class Conta {
+    id_conta: number
+    nome: string
+    descricao: string
+    data_nascimento: Date
+    seguindo: Array<Conta>
+    seguidores: Array<Conta>
+    inscricoes: Array<Comunidade>
+    subinscricoes: Array<SubComunidade>
+    lingua_principal: string
 
-    constructor(nomeUsuario: string, conteudo: string){
-        this.nomeUsuario = nomeUsuario
-        this.conteudo = conteudo
-        this.comentarios = []
-        this.curtidas = []
-        this.dataHora = new Date()
+    constructor(nomedePerfil: string, descricaoConta: string, idadeusuario: Date, seguindo: Array<Conta>, seguidores: Array<Conta>, inscricoes: Array<any>, subinscricoes: Array<SubComunidade>, lingua_principal: string){
+        this.nome = nomedePerfil
+        this.descricao = descricaoConta
+        this.data_nascimento = idadeusuario
+        this.seguindo = seguindo
+        this.seguidores = seguidores
+        this.inscricoes = inscricoes
+        this.subinscricoes = subinscricoes
+        this.lingua_principal = lingua_principal
     }
 
-    public getConteudo(): string{
-        return this.conteudo
+    GetIdConta(): number{
+        return this.id_conta
+    }
+    GetNomeUsuario(): string{
+        return this.nome
     }
 
-    public getDataHora(): Date{
-        return this.dataHora
+    GetDescricao(): string{
+        return this.descricao
     }
 
-    public getNomeUsuario(): string{
-        return this.nomeUsuario
+    GetIdade(): Date{
+        return this.data_nascimento
     }
 
-    public getCurtidas(): Array<Curtida>{
-        return this.curtidas
+    GetSeguindo(): Conta[]{
+        return this.seguindo
     }
 
-    public receberCurtida(curtida: Curtida): void{
-        this.curtidas.push(curtida)
+    GetSeguidores(): Conta[]{
+        return this.seguidores
     }
 
-    public removerCurtida(contaLogada: Contas): void{
-        for(let curtida of this.curtidas){
-            if(curtida.getNomeUsuario() === contaLogada.GetNomeUsuario()){
-                this.curtidas.splice(this.curtidas.indexOf(curtida), 1)
-            }
-        }
+    GetIncricoes(): Comunidade[] {
+        return this.inscricoes
     }
 
-    public receberComentario(comentario: Comentario): void{
-        this.comentarios.push(comentario)
+    GetSubInscricoes(): SubComunidade[]{
+        return this.subinscricoes
     }
 
-    public getComentarios(): Array<Comentario> {
-        return this.comentarios
+    GetLinguaPrincipal(): string {
+        return this.lingua_principal
     }
 
-
-}
-
-class Curtida{
-    private nomeUsuario: string
-
-    constructor(nomeUsuario: string){
-        this.nomeUsuario = nomeUsuario
+    SetConta(nomedePerfil: string, descricaoConta: string, idadeusuario: Date, lingua_principal: string): void{
+        this.nome = nomedePerfil
+        this.descricao = descricaoConta
+        this.data_nascimento = idadeusuario
+        this.lingua_principal = lingua_principal
     }
 
-    getNomeUsuario(): string{
-        return this.nomeUsuario
-    }
-    
-}
-
-class Comentario{
-    private nomeUsuario: string
-    private conteudo: string
-
-    constructor(nomeUsuario: string, conteudo: string){
-        this.nomeUsuario = nomeUsuario
-        this.conteudo = conteudo
+    AlterContaNome():void{
+        let mudanca = leitor.question("Novo Nome: ")
+        this.nome = mudanca
     }
 
-    public getNomeUsuario(): string{
-        return this.nomeUsuario
+    AlterContaDescricao():void{
+        let mudanca = leitor.question("Nova Descricao: ")
+        this.descricao = mudanca
     }
 
-    public getConteudo(): string{
-        return this.conteudo
+    AlterContaLinguaPrincipal():void{
+        let mudanca = leitor.question("Nova lingua principal: ")
+        this.lingua_principal = mudanca
     }
-
 }
