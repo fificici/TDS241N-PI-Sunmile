@@ -1,9 +1,8 @@
-import { Comunidade } from "./comunidades"
-import { SubComunidade } from "./comunidades"
-import { Post } from "./posts"
+import { Comunidade } from "./Comunidades"
+import { SubComunidade } from "./Comunidades"
+import { Post } from "./Posts"
 
 export class Conta {
-    id_conta: number
     nome: string
     descricao: string
     data_nascimento: Date
@@ -23,10 +22,6 @@ export class Conta {
         this.inscricoes = inscricoes
         this.subinscricoes = subinscricoes
         this.lingua_principal = lingua_principal
-    }
-
-    GetIdConta(): number{
-        return this.id_conta
     }
 
     GetNomeUsuario(): string{
