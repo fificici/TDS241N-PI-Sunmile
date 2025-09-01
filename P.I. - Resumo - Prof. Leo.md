@@ -1,6 +1,6 @@
 ***Resumo Projeto Integrador \- Sunmile***
 
-*Felipe Cantini, Gustavo Henrique, Mariana Santos, Yago dos Santos*  
+*Alexandre Lemos, Felipe Cantini, Gustavo Henrique, Liuji Kinoshita, Mariana Santos*  
 *TDS 24-1N*
 
 	O nosso Projeto Integrador será um aplicativo/site para a comunidade de Transtornos Neurológicos de Desenvolvimento, como TEA, Síndrome de Down, TDAH, entre outros, com o intuito de ser uma comunidade com ajuda profissional especializada na área, servindo para educar, apoiar e conscientizar todos os usuários.  
