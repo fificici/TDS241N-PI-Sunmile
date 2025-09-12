@@ -1,0 +1,341 @@
+/* -------- RESET -------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  background: #fff;
+  color: #333;
+}
+
+/* -------- CONTEÚDO PRINCIPAL -------- */
+.content {
+  flex: 1;
+  padding: 100px 40px 40px;
+  position: relative;
+}
+
+.content h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+/* -------- SIDEBAR -------- */
+.sidebar {
+  width: 240px;
+  background: #f9f9f9;
+  border-right: 3px solid transparent;
+  border-image: linear-gradient(to bottom, #58cc02, #ffcc00);
+  border-image-slice: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 10px;
+}
+
+/* LOGO */
+.logo {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #4a00e0;
+  margin-bottom: 40px;
+}
+
+/* MENU CENTRALIZADO */
+.menu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.menu a {
+  position: relative;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  width: 85%;
+  padding: 12px 15px;
+  border-radius: 30px;
+  transition: 0.3s;
+  overflow: hidden;
+}
+
+/* Outline gradiente arredondado */
+.menu a::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 30px;
+  padding: 2px;
+  background: linear-gradient(to right, #58cc02, #ffcc00);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: 0.3s;
+  z-index: -1;
+}
+
+.menu a:hover::before,
+.menu a:focus::before {
+  opacity: 1;
+}
+
+.menu a:hover,
+.menu a:focus {
+  color: #4a00e0;
+  transform: scale(1.05);
+  outline: none;
+}
+
+/* CONFIGURAÇÕES - DESKTOP */
+.settings {
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 15px;
+  border-radius: 30px;
+  transition: 0.3s;
+  margin-top: auto;
+}
+
+.settings:hover {
+  color: #4a00e0;
+}
+
+/* -------- BARRA DE PESQUISA -------- */
+.search-bar {
+  position: fixed;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 45%;
+  max-width: 500px;
+  z-index: 100;
+}
+
+.search-wrapper {
+  position: relative;
+  flex: 1;
+  border-radius: 30px;
+  padding: 2px;
+  background: linear-gradient(to right, #58cc02, #ffcc00);
+}
+
+.search-wrapper input {
+  width: 100%;
+  padding: 12px 15px 12px 45px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 30px;
+  outline: none;
+  background: #fff;
+  display: block;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  font-size: 22px;
+  color: #888;
+  pointer-events: none;
+}
+
+/* -------- MENU DE CONFIGURAÇÕES -------- */
+.settings-menu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 250px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  padding: 15px;
+  z-index: 300;
+  opacity: 0;
+  transform: scale(0.9);
+  transform-origin: top right;
+  transition: 0.2s ease;
+}
+
+.settings-menu.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ITEMS */
+.settings-menu button.settings-option {
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 1rem;
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.settings-menu button.settings-option:hover {
+  background: #f0f0f0;
+}
+
+/* SWITCHES */
+.switch {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+}
+
+.switch input {
+  display: none;
+}
+
+.switch .slider {
+  width: 40px;
+  height: 20px;
+  background: #ccc;
+  border-radius: 50px;
+  position: relative;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.switch .slider::before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 1px;
+  top: 1px;
+  background: #fff;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.switch input:checked + .slider {
+  background: #4a00e0;
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(20px);
+}
+
+/* -------- RESPONSIVO MOBILE -------- */
+@media (max-width: 900px) {
+  body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    flex-direction: row;
+    justify-content: space-around; 
+    align-items: center;
+    padding: 0 10px;
+    border-right: none;
+    border-top: 3px solid transparent;
+    border-image: linear-gradient(to right, #58cc02, #ffcc00);
+    border-image-slice: 1;
+    background: #f9f9f9;
+    z-index: 200;
+  }
+
+  .logo { display: none; }
+
+  .menu {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .menu a {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    width: auto;
+    position: relative;
+  }
+
+  .menu a .menu-text { display: none; }
+
+  .menu a::before { content: none; }
+
+  .menu a:hover,
+  .menu a:focus {
+    transform: scale(1.15);
+    color: #4a00e0;
+    outline: none;
+  }
+
+  /* Configurações círculo mobile */
+  .settings {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(to right, #58cc02, #ffcc00);
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .settings .material-symbols-outlined {
+    font-size: 35px;
+    color: #fff;
+  }
+
+  .settings .menu-text { display: none; }
+
+  .settings-menu {
+    position: fixed;
+    right: 20px;
+    bottom: 160px;
+    width: 250px;
+  }
+
+  .search-bar {
+    width: 90%;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .content {
+    padding: 80px 20px 120px;
+  }
+}

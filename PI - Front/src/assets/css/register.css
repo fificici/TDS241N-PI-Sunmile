@@ -1,0 +1,112 @@
+/* -------- RESET -------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+body {
+  color: #333;
+  background: #fff; /* fundo branco uniforme */
+  scroll-behavior: smooth;
+}
+
+.close-btn {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  text-decoration: none;
+  color: #333;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn .material-symbols-outlined {
+  font-size: 40px; /* aumente aqui */
+}
+
+.close-btn:hover {
+  color: #ff0000; /* fica vermelho ao passar o mouse */
+  transform: scale(1.1);
+}
+
+/* -------- HERO / FORMULÁRIO -------- */
+.register-hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  background: #fff;
+  text-align: center;
+}
+
+.register-hero h1 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #4a00e0
+}
+
+/* FORMULÁRIO */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.register-form input {
+  padding: 12px 15px;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 30px;
+  outline: none;
+  transition: 0.3s;
+  background: #fff;
+}
+
+/* GRADIENTE NO FOCUS COM CANTOS ARREDONDADOS */
+.register-form input:focus {
+  border: 2px solid transparent;
+  border-radius: 30px;
+  background: 
+    linear-gradient(#fff, #fff) padding-box, /* fundo branco */
+    linear-gradient(to right, #58cc02, #ffcc00) border-box; /* gradiente no contorno */
+  box-shadow: 0 0 6px rgba(88, 204, 2, 0.4);
+}
+
+/* BOTÃO */
+.register-form button {
+  padding: 16px;
+  font-size: 1.2rem;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  border: none;
+  background: linear-gradient(90deg, #8e2de2, #4a00e0);
+  color: #fff;
+  transition: 0.3s;
+}
+
+.register-form button:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .register-hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .register-form button,
+  .register-form input {
+    font-size: 1rem;
+    padding: 12px;
+  }
+}
