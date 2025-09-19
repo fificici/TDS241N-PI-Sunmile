@@ -1,6 +1,5 @@
 import { Conta } from "./Contas"
 import { Post } from "./Posts"
-import { Rede } from "./database"
 
 export class Comunidade{
     posts_comunidades: Array<Post>
