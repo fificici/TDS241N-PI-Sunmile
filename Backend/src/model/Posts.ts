@@ -1,98 +1,90 @@
-import { Conta } from "./contas"
+import { Account } from "./Accounts"
 
 export class Post{
     id_post: number
-    private nomeUsuario: string
-    private conteudo: string
-    private comentarios: Array<Comentario>
-    private curtidas: Array<Curtida>
-    private dataHora: Date
-    comunidade_destinada: string
+    private UserName: string
+    private Content: string
+    private Comments: Array<Comment>
+    private Likes: Array<Like>
+    private DateHour: Date
+    DestinatedCommunity: string
 
-    constructor(IdPostagem:number, nomeUsuario: string, conteudo: string, comunidadeDestinataria: string){
+    constructor(IdPostagem:number, UserName: string, Content: string, comunidadeDestinataria: string){
         this.id_post = IdPostagem
-        this.nomeUsuario = nomeUsuario
-        this.conteudo = conteudo
-        this.comentarios = []
-        this.curtidas = []
-        this.dataHora = new Date()
-        this.comunidade_destinada = comunidadeDestinataria
+        this.UserName = UserName
+        this.Content = Content
+        this.Comments = []
+        this.Likes = []
+        this.DateHour = new Date()
+        this.DestinatedCommunity = comunidadeDestinataria
     }
 
     public GetIdPost(): number{
         return this.id_post
     }
 
-    public GetConteudo(): string{
-        return this.conteudo
+    public GetContent(): string{
+        return this.Content
     }
 
-    public GetDataHora(): Date{
-        return this.dataHora
+    public GetDateHour(): Date{
+        return this.DateHour
     }
 
-    public GetNomeUsuario(): string{
-        return this.nomeUsuario
+    public GetUserName(): string{
+        return this.UserName
     }
 
-    public GetCurtidas(): Array<Curtida>{
-        return this.curtidas
+    public GetLikes(): Array<Like>{
+        return this.Likes
     }
 
     GetDestinatario(): string{
-        return this.comunidade_destinada
+        return this.DestinatedCommunity
     }
     
-    public ReceberCurtida(curtida: Curtida): void{
-        this.curtidas.push(curtida)
+    public ReceberLike(Like: Like): void{
+        this.Likes.push(Like)
     }
 
-    public RemoverCurtida(contaLogada: Conta): void{
-        for(let curtida of this.curtidas){
-            if(curtida.GetNomeUsuario() === contaLogada.GetNomeUsuario()){
-                this.curtidas.splice(this.curtidas.indexOf(curtida), 1)
-            }
-        }
+    public ReceberComment(Comment: Comment): void{
+        this.Comments.push(Comment)
     }
 
-    public ReceberComentario(comentario: Comentario): void{
-        this.comentarios.push(comentario)
-    }
-
-    public GetComentarios(): Array<Comentario> {
-        return this.comentarios
+    public GetComments(): Array<Comment> {
+        return this.Comments
     }
 
 }
 
-class Curtida{
-    private nomeUsuario: string
+class Like{
+    private UserName: string
 
-    constructor(nomeUsuario: string){
-        this.nomeUsuario = nomeUsuario
+    constructor(UserName: string){
+        this.UserName = UserName
     }
 
-    GetNomeUsuario(): string{
-        return this.nomeUsuario
+    GetUserName(): string{
+        return this.UserName
     }
     
 }
 
-class Comentario{
-    private nomeUsuario: string
-    private conteudo: string
+class Comment{
+    private UserName: string
+    private Content: string
 
-    constructor(nomeUsuario: string, conteudo: string){
-        this.nomeUsuario = nomeUsuario
-        this.conteudo = conteudo
+    constructor(UserName: string, Content: string){
+        this.UserName = UserName
+        this.Content = Content
     }
 
-    public GetNomeUsuario(): string{
-        return this.nomeUsuario
+    public GetUserName(): string{
+        return this.UserName
     }
 
-    public GetConteudo(): string{
-        return this.conteudo
+    public GetContent(): string{
+        return this.Content
     }
 
 }
