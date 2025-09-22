@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany, BeforeInsert, Before
 import * as bcrypt from "bcryptjs";
 
 @Entity('professionals') // Informa para o ORM que essa classe será uma Entidade do Banco de Dados
-export class Studen {
+export class Student {
 
     @PrimaryGeneratedColumn() // Define que o campo será uma Chave Primária (PK) e Auto Incrementável (AI)
     id!: number;
@@ -58,4 +58,5 @@ export class Studen {
         this.birth_date = birth_date
         this.password = password
     }
+
 }
