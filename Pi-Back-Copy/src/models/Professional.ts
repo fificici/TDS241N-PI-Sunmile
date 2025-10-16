@@ -1,9 +1,9 @@
 import { Entity, Column, OneToOne, JoinColumn } from 'typeorm';
 import { User } from './User';
 
-@Entity('professionals') // Informa para o ORM que essa classe será uma Entidade do Banco de Dados
-export class Professioanl {
+@Entity('professionals') 
 
+export class Professional {
 
     @Column({ type: "text" })
     bio: string
@@ -13,7 +13,7 @@ export class Professioanl {
 
     @OneToOne(() => User)
     @JoinColumn()
-    user: User;
+    user: User
 
     constructor(bio: string, pro_registration: string, user: User) {
 
