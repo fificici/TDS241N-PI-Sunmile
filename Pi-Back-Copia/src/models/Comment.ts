@@ -6,7 +6,7 @@ import { Post } from './Post'
 
 export class Comment {
 
-    @PrimaryGeneratedColumn()
+    // @PrimaryGeneratedColumn()
     id!: number
   
     @Column({ type: 'text', nullable: false })

@@ -6,7 +6,7 @@ import { Post } from './Post'
 
 export class Community {
 
-    @PrimaryGeneratedColumn()
+    // @PrimaryGeneratedColumn()
     id!: number
   
     @Column({ length: 100, unique: true })
@@ -19,14 +19,14 @@ export class Community {
     @JoinColumn({ name: 'creator_id' })
     creator: User
 
-    @OneToMany(() => Post, (post) => post.community)
-    posts: Post[]
+    // @OneToMany(() => Post, (post) => post.community)
+    // posts: Post[]
   
     @CreateDateColumn()
     created_at!: Date
   
-    constructor(name: string, description: string, creator: User, posts: Post[]) {
-      this.posts = posts     
+    constructor(name: string, description: string, creator: User) {
+    //   this.posts = posts     
       this.name = name
       this.description = description
       this.creator = creator
