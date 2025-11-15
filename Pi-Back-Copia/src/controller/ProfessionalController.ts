@@ -1,4 +1,6 @@
 import { Request, Response } from "express"
+import { ProfessionalRepository } from "../repositories/ProfessionalRepository"
+import { UserRepository } from "../repositories/PostRepository"
 
 export class ProfessionalController {
 
@@ -15,9 +17,9 @@ export class ProfessionalController {
             .json({ message: "Something is missing!" })
         }
   
-        const userExists = await professionalRepository.findByEmail(email)
-        const verificationBirthDate = await professionalRepository.verifyBirthDate(birth_date)
-        const verificationPassword = await professionalRepository.verifyPassword(password)
+        const userExists = await ProfessionalRepository.findByEmail(email)
+        const verificationBirthDate = await ProfessionalRepository.verifyBirthDate(birth_date)
+        const verificationPassword = await ProfessionalRepository.verifyPassword(password)
 
         if (userExists) {
           return res.status(409).json({ message: "Email already in use!" })
@@ -31,7 +33,7 @@ export class ProfessionalController {
           return res.status(409).json({ message: "Insert a stronger password!" })
         }
   
-        const professional = await professionalRepository.createAndSave({
+        const professional = await ProfessionalRepository.createAndSave({
           name,
           username,
           email,
@@ -62,7 +64,7 @@ export class ProfessionalController {
             return res.status(403).json({ message: "Access denied" })
           }
     
-          const professional = await professionalRepository.findById(id)
+          const professional = await ProfessionalRepository.findById(id)
   
           if (!professional) return res.status(404).json({ message: "Professional not found" })
     
@@ -74,7 +76,7 @@ export class ProfessionalController {
   
           if (email) {
   
-            const emailExists = await professionalRepository.findByEmail(email)
+            const emailExists = await ProfessionalRepository.findByEmail(email)
   
             if (emailExists && emailExists.id !== professional.id) {
   
@@ -87,7 +89,7 @@ export class ProfessionalController {
   
           if (username) {
   
-            const usernameExists = await professionalRepository.findByUsername(username)
+            const usernameExists = await ProfessionalRepository.findByUsername(username)
   
             if (usernameExists && usernameExists.id !== professional.id) {
   
@@ -99,7 +101,7 @@ export class ProfessionalController {
           }
           
     
-          const updatedProfessional = await professionalRepository.save(professional)
+          const updatedProfessional = await ProfessionalRepository.save(professional)
   
           return res.json(updatedProfessional)
   
@@ -121,11 +123,11 @@ export class ProfessionalController {
             return res.status(403).json({ message: "Access denied" })
           }
     
-          const professional = await professionalRepository.findById(id)
+          const professional = await ProfessionalRepository.findById(id)
 
           if (!professional) return res.status(404).json({ message: "User not found" })
     
-          await professionalRepository.removeUser(professional)
+          await ProfessionalRepository.removeUser(professional)
   
           return res.status(204).send()
   

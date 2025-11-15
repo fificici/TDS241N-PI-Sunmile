@@ -21,6 +21,10 @@ export class UserRepository {
     return this.repository.findOneBy({ email })
   }
 
+  async verifyBirthDate(birth_date: Date) {
+    
+  }
+
   async createAndSave(data: Partial<User>): Promise<User> {
 
     const user = this.repository.create(data)

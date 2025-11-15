@@ -7,7 +7,7 @@ import { Comment } from './Comment';
 
 export class Post {
 
-    // @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn()
     id!: number
   
     @Column({ length: 200 })
@@ -24,8 +24,8 @@ export class Post {
     @JoinColumn({ name: 'community_id' })
     community: Community
   
-    // @OneToMany(() => Comment, (comment) => comment.post)
-    // comments!: Comment[]
+    @OneToMany(() => Comment, (comment) => comment.post)
+    comments!: Comment[]
   
     @CreateDateColumn()
     created_at!: Date

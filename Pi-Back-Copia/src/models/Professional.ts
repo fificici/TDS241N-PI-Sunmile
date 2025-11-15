@@ -5,6 +5,9 @@ import { User } from './User';
 
 export class Professional {
 
+    @PrimaryGeneratedColumn()
+    id!: number
+
     @Column({ type: "text" })
     bio: string
 
