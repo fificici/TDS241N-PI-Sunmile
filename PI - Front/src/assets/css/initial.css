@@ -8,7 +8,7 @@
 
 body {
   color: #333;
-  background: #fff; /* fundo branco uniforme */
+  background: #fff; 
   scroll-behavior: smooth;
 }
 
@@ -25,8 +25,8 @@ body {
 }
 
 .hero-logo {
-  width: 250px;       /* logo menor */
-  max-width: 25%;     /* garante proporcionalidade */
+  width: 250px;       
+  max-width: 25%;     
   margin-bottom: 40px;
 }
 
@@ -51,10 +51,10 @@ body {
   transition: 0.3s;
   z-index: 1;
   overflow: hidden;
-  text-decoration: none; /* remove sublinhado */
+  text-decoration: none; 
 }
 
-/* -------- BOTÃO LOGIN (branco com degradê arredondado) -------- */
+/* -------- BOTÃO LOGIN -------- */
 .btn-login {
   background: #fff;
   color: #58cc02;

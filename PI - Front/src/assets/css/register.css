@@ -8,14 +8,29 @@
 
 body {
   color: #333;
-  background: #fff; /* fundo branco uniforme */
+  background: #fff; 
   scroll-behavior: smooth;
 }
 
+.btn-register {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  padding: 16px;
+  font-size: 1.2rem;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  background: linear-gradient(90deg, #8e2de2, #4a00e0);
+  color: #fff;
+  transition: 0.3s;
+}
+
+
 .close-btn {
   position: absolute;
-  top: 100px;
-  left: 100px;
+  top: 10vh;        
+  left: 10vw;       
   text-decoration: none;
   color: #333;
   transition: 0.3s;
@@ -24,12 +39,13 @@ body {
   justify-content: center;
 }
 
+
 .close-btn .material-symbols-outlined {
-  font-size: 40px; /* aumente aqui */
+  font-size: 40px; 
 }
 
 .close-btn:hover {
-  color: #ff0000; /* fica vermelho ao passar o mouse */
+  color: #ff0000; 
   transform: scale(1.1);
 }
 
@@ -75,8 +91,8 @@ body {
   border: 2px solid transparent;
   border-radius: 30px;
   background: 
-    linear-gradient(#fff, #fff) padding-box, /* fundo branco */
-    linear-gradient(to right, #58cc02, #ffcc00) border-box; /* gradiente no contorno */
+    linear-gradient(#fff, #fff) padding-box, 
+    linear-gradient(to right, #58cc02, #ffcc00) border-box; 
   box-shadow: 0 0 6px rgba(88, 204, 2, 0.4);
 }
 

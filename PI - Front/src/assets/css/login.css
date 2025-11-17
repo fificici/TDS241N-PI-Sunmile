@@ -26,11 +26,11 @@ body {
 }
 
 .close-btn .material-symbols-outlined {
-  font-size: 40px; /* aumente aqui */
+  font-size: 40px; 
 }
 
 .close-btn:hover {
-  color: #ff0000; /* fica vermelho ao passar o mouse */
+  color: #ff0000; 
   transform: scale(1.1);
 }
 
@@ -75,8 +75,8 @@ body {
   border: 2px solid transparent;
   border-radius: 30px;
   background: 
-    linear-gradient(#fff, #fff) padding-box, /* fundo branco */
-    linear-gradient(to right, #58cc02, #ffcc00) border-box; /* gradiente no contorno */
+    linear-gradient(#fff, #fff) padding-box, 
+    linear-gradient(to right, #58cc02, #ffcc00) border-box; 
   box-shadow: 0 0 6px rgba(88, 204, 2, 0.4);
 }
 

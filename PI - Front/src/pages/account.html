@@ -1,0 +1,46 @@
+<div class="perfil-container">
+
+  <h2 class="perfil-title">Meu Perfil</h2>
+
+  <div class="perfil-card">
+    
+    <form id="perfil-form" class="perfil-form">
+
+      <div class="form-group">
+        <label>Nome completo</label>
+        <input type="text" name="name" required>
+      </div>
+
+      <div class="form-group">
+        <label>Nome de usuário</label>
+        <input type="text" name="username" required>
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" required>
+      </div>
+
+      <div class="form-group">
+        <label>CPF</label>
+        <input type="text" name="cpf" readonly style="background:#eaeaea; cursor:not-allowed;">
+      </div>
+
+      <div class="form-group">
+        <label>Data de nascimento</label>
+        <input type="date" name="birth_date" readonly style="background:#eaeaea; cursor:not-allowed;">
+      </div>
+
+      <div class="perfil-actions">
+        <button type="button" id="btn-password" class="btn-secondary">Alterar Senha</button>
+        <button type="submit" class="btn-primary">Salvar Alterações</button>
+        <button id="delete-account-btn" class="delete-account-btn">Deletar Conta</button>
+      </div>
+
+      <p id="status" class="perfil-status"></p>
+
+    </form>
+
+  </div>
+
+</div>

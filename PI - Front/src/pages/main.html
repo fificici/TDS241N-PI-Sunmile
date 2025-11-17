@@ -3,32 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Main - Projeto</title>
-  <link rel="stylesheet" href="../assets/css/main.css">
-  <!-- Google Icons -->
+  <title>Sunmile | Principal</title>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/main.css">
 </head>
 <body>
 
-  <!-- Barra lateral esquerda -->
   <aside class="sidebar">
-    <div class="logo">LOGO</div>
+    <div class="logo">Sunmile</div>
 
     <nav class="menu">
-      <a href="#"><span class="material-symbols-outlined">groups</span><span class="menu-text">Comunidades</span></a>
-      <a href="#"><span class="material-symbols-outlined">article</span><span class="menu-text">Posts</span></a>
-      <a href="#"><span class="material-symbols-outlined">badge</span><span class="menu-text">Profissionais</span></a>
-      <a href="#"><span class="material-symbols-outlined">person</span><span class="menu-text">Perfil</span></a>
+      <a href="#" data-page="comunidades"><span class="material-symbols-outlined">groups</span><span class="menu-text">Comunidades</span></a>
+      <a href="#" data-page="posts"><span class="material-symbols-outlined">article</span><span class="menu-text">Posts</span></a>
+      <a href="#" data-page="profissionais"><span class="material-symbols-outlined">badge</span><span class="menu-text">Profissionais</span></a>
+      <a href="#" data-page="account"><span class="material-symbols-outlined">person</span><span class="menu-text">Perfil</span></a>
     </nav>
 
-    <!-- Configurações -->
     <div class="settings">
       <span class="material-symbols-outlined">settings</span>
       <span class="menu-text">Configurações</span>
     </div>
   </aside>
 
-  <!-- Menu flutuante de Configurações -->
+  <!-- Menu flutuante -->
   <div class="settings-menu">
     <label class="switch">
       <span>Perfil Privado</span>
@@ -38,31 +35,33 @@
 
     <label class="switch">
       <span>Tema Escuro</span>
-      <input type="checkbox">
+      <input type="checkbox" id="darkModeToggle">
       <span class="slider"></span>
     </label>
 
     <button class="settings-option">Idioma</button>
     <button class="settings-option">Sobre o Site</button>
     <button class="settings-option">Termos de Serviços</button>
-    <button class="settings-option">Sair</button>
+    <button class="settings-option logout-btn">Sair</button>
   </div>
 
-  <!-- Conteúdo principal -->
-  <main class="content">
-    <div class="search-bar">
-      <div class="search-wrapper">
-        <span class="material-symbols-outlined search-icon">search</span>
-        <input type="text" placeholder="Pesquisar...">
-      </div>
+<main class="content">
+
+  <div class="search-bar">
+    <div class="search-wrapper">
+      <span class="material-symbols-outlined search-icon">search</span>
+      <input type="text" placeholder="Pesquisar...">
     </div>
+  </div>
 
-    <h1>Bem-vindo ao Projeto</h1>
-    <p>Conteúdo principal aparecerá aqui...</p>
-  </main>
+  <div id="page-container">
+    <h1>"Antes de pensar em matar, pense na educação." - Oruam, 2025</h1>
+    <p>Tem nada aqui mas um dia irá ter</p>
+  </div>
 
-  <!-- JS separado -->
-  <script src="../assets/js/main.js"></script>
+</main>
+
+<script src="../assets/js/main.js"></script>
 
 </body>
 </html>
