@@ -26,6 +26,31 @@ body {
   transition: 0.3s;
 }
 
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 45px; 
+}
+
+.toggle-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 22px;
+  color: #555;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle-icon:hover {
+  color: #000;
+}
+
 
 .close-btn {
   position: absolute;

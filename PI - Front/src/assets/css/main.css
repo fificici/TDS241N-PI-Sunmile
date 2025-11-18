@@ -254,8 +254,12 @@ body {
 .perfil-container {
   width: 100%;
   max-width: 650px;
-  margin: 0 auto;
-  margin-top: 40px;
+
+  /* Remove empurrões verticais */
+  margin: 20px auto 40px;
+
+  /* Permite ajuste em telas menores */
+  padding: 0 16px;
 }
 
 .perfil-title {
@@ -263,15 +267,18 @@ body {
   font-weight: bold;
   margin-bottom: 20px;
   color: var(--text-color);
+  text-align: center;
 }
 
 .perfil-card {
   width: 100%;
-  max-width: 550px;
-  margin: 40px auto;
+  max-width: 520px;
+
+  /* Margem reduzida para evitar overflow em telas menores */
+  margin: 25px auto;
 
   border-radius: 28px;
-  padding: 35px 40px;
+  padding: 28px 30px;
 
   box-shadow: 0 8px 28px rgba(0,0,0,0.15);
 
@@ -281,20 +288,21 @@ body {
 
   border: 3px solid transparent;
 
-  transition: 
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  /* Evita que o conteúdo estoure verticalmente */
+  overflow: hidden;
 }
 
 .perfil-card:hover {
-  transform: translateY(-4px) scale(1.015);
+  transform: translateY(-3px) scale(1.01);
   box-shadow: 0 12px 36px rgba(0,0,0,0.22);
 }
 
 .perfil-form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
 }
 
 .form-group {
@@ -323,27 +331,28 @@ body {
   border-color: var(--purple-color);
 }
 
-/* === BOTÕES === */
-
+/* === Ações do perfil === */
 .perfil-actions {
-  margin-top: 15px;
-  display: grid;                /* 👍 AGORA É GRID */
-  grid-template-columns: repeat(3, 1fr); /* 3 botões iguais */
-  gap: 12px;                    /* Espaço entre eles */
+  margin-top: 18px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+
+  /* previne botões gigantes em telas pequenas */
+  width: 100%;
 }
 
 .btn-primary,
 .btn-secondary,
 .delete-account-btn {
-  padding: 12px 18px;
-  width: 100%;                 /* Largura igual */
-  text-align: center;
+  padding: 12px;
   border: none;
   border-radius: 12px;
   font-weight: bold;
   cursor: pointer;
   transition: 0.25s ease;
-  font-size: 15px;
+  text-align: center;
 }
 
 /* Botão salvar */
@@ -356,7 +365,7 @@ body {
   transform: scale(1.05);
 }
 
-/* Botão alterar senha */
+/* Alterar senha */
 .btn-secondary {
   background: var(--purple-color);
   color: white;
@@ -366,7 +375,7 @@ body {
   transform: scale(1.05);
 }
 
-/* Botão deletar conta */
+/* Deletar */
 .delete-account-btn {
   background: #ff3b30;
   color: white;
@@ -382,6 +391,7 @@ body {
   font-size: 1rem;
   font-weight: bold;
 }
+
 
 .switch input:checked + .slider { background: var(--purple-color); }
 .switch input:checked + .slider::before { transform: translateX(20px); }

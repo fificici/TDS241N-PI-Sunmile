@@ -4,13 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sunmile | Cadastro</title>
+
   <link rel="stylesheet" href="../assets/css/register.css">
-
-
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 <body>
-
 
   <a href="register-options.html" class="close-btn">
     <span class="material-symbols-outlined">arrow_back</span>
@@ -18,16 +16,33 @@
 
   <section class="register-hero">
     <h1>CRIE SUA CONTA</h1>
+
     <form id="register-form" class="register-form">
+
       <input type="text" name="name" placeholder="Nome completo" required>
-      <input type="text" name="username" placeholder="@ de usuário" required>
+      <input type="text" name="username" placeholder="Nome de usuário" required>
       <input type="email" name="email" placeholder="Email" required>
       <input type="text" name="cpf" placeholder="CPF" required>
       <input type="date" name="birth_date" placeholder="Data de nascimento" required>
-      <input type="password" name="password" placeholder="Senha" required>
+
+      <div class="password-wrapper">
+        <input 
+          type="password" 
+          name="password" 
+          id="password" 
+          placeholder="Senha" 
+          required
+        >
+        <span id="toggle-password" class="material-symbols-outlined toggle-icon">
+          visibility
+        </span>
+      </div>
+
       <button type="submit" class="btn-register">REGISTRAR</button>
     </form>
   </section>
+
   <script src="../assets/js/register-user.js"></script>
+
 </body>
 </html>
