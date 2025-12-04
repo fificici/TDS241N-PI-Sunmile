@@ -60,16 +60,57 @@ const links = document.querySelectorAll(".menu a");
 const API_BASE = "http://localhost:3000/sunmile";
 const token = localStorage.getItem("token");
 
+
+// 🔥 Função para carregar o usuário logado uma única vez
+async function getCurrentUser() {
+  try {
+    const res = await fetch(`${API_BASE}/me`, {
+      headers: { "Authorization": `Bearer ${token}` }
+    });
+
+    if (!res.ok) {
+      throw new Error("Não autorizado");
+    }
+
+    return await res.json();
+
+  } catch (err) {
+    console.error("Erro ao carregar usuário:", err);
+    return null;
+  }
+}
+
+
+// 🔥 Função principal para navegação
 async function carregarPagina(page) {
   searchBar.style.display = page === "account" ? "none" : "block";
 
   try {
+
+    // ⭐ SE A PÁGINA FOR PERFIL → VERIFICA TIPO E CARREGA A CORRETA
+    if (page === "account") {
+
+      const user = await getCurrentUser();
+      if (!user) {
+        pageContainer.innerHTML = "<p>Erro ao carregar usuário.</p>";
+        return;
+      }
+
+      const profilePage = user.type === "pro" ? "account-pro" : "account-user";
+
+      const html = await fetch(`../pages/${profilePage}.html`).then(r => r.text());
+      pageContainer.innerHTML = html;
+
+      carregarPerfilJS(user);
+      return;
+    }
+
+    // ⭐ Para páginas comuns:
     const html = await fetch(`../pages/${page}.html`).then(r => r.text());
     pageContainer.innerHTML = html;
 
-    if (page === "account") carregarPerfilJS();
-
   } catch (err) {
+    console.error(err);
     pageContainer.innerHTML = "<p>Erro ao carregar página.</p>";
   }
 }
@@ -87,29 +128,22 @@ links.forEach(link => {
    SEÇÃO 3 — PERFIL DO USUÁRIO + UPDATE + DELETE
 ============================================================ */
 
-function carregarPerfilJS() {
+function carregarPerfilJS(currentUser) {
+
   const form = document.getElementById("perfil-form");
   const statusMsg = document.getElementById("status");
   const deleteBtn = document.getElementById("delete-account-btn");
-  let currentUser = null;
 
-  /* ---------- Carregar usuário logado ---------- */
-  async function loadUser() {
-    const res = await fetch(`${API_BASE}/me`, {
-      headers: { "Authorization": `Bearer ${token}` }
-    });
+  // 🔥 Preencher o formulário corretamente
+  form.name.value = currentUser.name;
+  form.username.value = currentUser.username;
+  form.email.value = currentUser.email;
 
-    currentUser = await res.json();
-
-    form.name.value = currentUser.name;
-    form.username.value = currentUser.username;
-    form.email.value = currentUser.email;
-    form.cpf.value = currentUser.cpf;
-    form.birth_date.value = currentUser.birth_date?.split("T")[0] || "";
-  }
-
-  loadUser();
-
+  if (form.cpf) form.cpf.value = currentUser.cpf;
+  if (form.birth_date) form.birth_date.value = currentUser.birth_date?.split("T")[0] || "";
+  if (form.pro_registration) form.pro_registration.value = currentUser.pro_registration || "";
+  if (form.phone_number) form.phone_number.value = currentUser.phone_number || "";
+  if (form.bio) form.bio.value = currentUser.bio || "";
 
   /* ---------- Atualizar perfil ---------- */
   form.addEventListener("submit", async (e) => {

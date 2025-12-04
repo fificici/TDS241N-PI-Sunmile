@@ -13,10 +13,11 @@ form.addEventListener("submit", async (e) => {
     cpf: formData.get("cpf"),
     birth_date: formData.get("birth_date"),
     password: formData.get("password"),
+    pro_registration: formData.get("pro_registration")
   };
 
   try {
-    const response = await fetch("http://localhost:3000/sunmile/users", {
+    const response = await fetch("http://localhost:3000/sunmile/pro", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
