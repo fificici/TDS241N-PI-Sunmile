@@ -20,14 +20,26 @@
       <input type="text" name="name" placeholder="Nome completo" required>
       <input type="text" name="username" placeholder="Nome de usuário" required>
       <input type="email" name="email" placeholder="Email" required>
+      <input type="text" name="phone_number" placeholder="N° de Celular" required>
       <input type="text" name="cpf" placeholder="CPF" required>
       <input type="date" name="birth_date" required>
       <input type="text" name="pro_registration" placeholder="Registro Profissional (CRM ou CIP)" required>
-      <input type="password" name="password" placeholder="Senha" required>
+      <div class="password-wrapper">
+        <input 
+          type="password" 
+          name="password" 
+          id="password" 
+          placeholder="Senha" 
+          required
+        >
+        <span id="toggle-password" class="material-symbols-outlined toggle-icon">
+          visibility
+        </span>
+      </div>
       <button type="submit" class="btn-register">REGISTRAR</button>
     </form>
 
   </section>
-
+  <script src="../assets/js/register-pro.js"></script>
 </body>
 </html>

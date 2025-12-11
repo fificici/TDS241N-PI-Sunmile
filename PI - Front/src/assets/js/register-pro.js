@@ -11,6 +11,7 @@ form.addEventListener("submit", async (e) => {
     username: formData.get("username"),
     email: formData.get("email"),
     cpf: formData.get("cpf"),
+    phone_number: formData.get("phone_number"),
     birth_date: formData.get("birth_date"),
     password: formData.get("password"),
     pro_registration: formData.get("pro_registration")
@@ -32,7 +33,7 @@ form.addEventListener("submit", async (e) => {
       return;
     }
 
-    alert("Usuário criado com sucesso!");
+    alert("Profissional criado com sucesso!");
     console.log(result);
 
   } catch (error) {

@@ -60,17 +60,13 @@ const links = document.querySelectorAll(".menu a");
 const API_BASE = "http://localhost:3000/sunmile";
 const token = localStorage.getItem("token");
 
-
-// 🔥 Função para carregar o usuário logado uma única vez
 async function getCurrentUser() {
   try {
     const res = await fetch(`${API_BASE}/me`, {
       headers: { "Authorization": `Bearer ${token}` }
     });
 
-    if (!res.ok) {
-      throw new Error("Não autorizado");
-    }
+    if (!res.ok) throw new Error("Não autorizado");
 
     return await res.json();
 
@@ -80,23 +76,18 @@ async function getCurrentUser() {
   }
 }
 
-
-// 🔥 Função principal para navegação
 async function carregarPagina(page) {
   searchBar.style.display = page === "account" ? "none" : "block";
 
   try {
-
-    // ⭐ SE A PÁGINA FOR PERFIL → VERIFICA TIPO E CARREGA A CORRETA
     if (page === "account") {
-
       const user = await getCurrentUser();
       if (!user) {
         pageContainer.innerHTML = "<p>Erro ao carregar usuário.</p>";
         return;
       }
 
-      const profilePage = user.type === "pro" ? "account-pro" : "account-user";
+      const profilePage = user.role === "pro" ? "account-pro" : "account-user";
 
       const html = await fetch(`../pages/${profilePage}.html`).then(r => r.text());
       pageContainer.innerHTML = html;
@@ -105,7 +96,6 @@ async function carregarPagina(page) {
       return;
     }
 
-    // ⭐ Para páginas comuns:
     const html = await fetch(`../pages/${page}.html`).then(r => r.text());
     pageContainer.innerHTML = html;
 
@@ -134,45 +124,90 @@ function carregarPerfilJS(currentUser) {
   const statusMsg = document.getElementById("status");
   const deleteBtn = document.getElementById("delete-account-btn");
 
-  // 🔥 Preencher o formulário corretamente
-  form.name.value = currentUser.name;
-  form.username.value = currentUser.username;
-  form.email.value = currentUser.email;
+  /* ============================================================
+     1. Preencher dados do USER
+  ============================================================= */
 
-  if (form.cpf) form.cpf.value = currentUser.cpf;
+  form.name.value = currentUser.name || "";
+  form.username.value = currentUser.username || "";
+  form.email.value = currentUser.email || "";
+
+  if (form.cpf) form.cpf.value = currentUser.cpf || "";
   if (form.birth_date) form.birth_date.value = currentUser.birth_date?.split("T")[0] || "";
-  if (form.pro_registration) form.pro_registration.value = currentUser.pro_registration || "";
-  if (form.phone_number) form.phone_number.value = currentUser.phone_number || "";
-  if (form.bio) form.bio.value = currentUser.bio || "";
 
-  /* ---------- Atualizar perfil ---------- */
+  /* ============================================================
+     2. Preencher dados do PROFESSIONAL
+  ============================================================= */
+
+  const pro = currentUser.professional || null;
+
+  if (pro) {
+    if (form.phone_number) form.phone_number.value = pro.phone_number || "";
+    if (form.bio) form.bio.value = pro.bio || "";
+    if (form.pro_registration) form.pro_registration.value = pro.pro_registration || "";
+  }
+
+  /* ============================================================
+     3. Atualizar perfil (PUT)
+  ============================================================= */
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const body = {
+    // Dados do usuário normal
+    const bodyUser = {
       name: form.name.value,
       username: form.username.value,
       email: form.email.value
     };
 
-    const res = await fetch(`${API_BASE}/users/${currentUser.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      },
-      body: JSON.stringify(body)
-    });
+    // Se for PRO -> manda também os dados da tabela Professional
+    let endpoint = `${API_BASE}/users/${currentUser.id}`;
 
-    const result = await res.json();
+    if (currentUser.role === "pro") {
+      endpoint = `${API_BASE}/pro/${currentUser.id}`;
 
-    statusMsg.textContent = result.message || "Atualizado!";
-    statusMsg.style.color = res.ok ? "green" : "red";
+      bodyUser.bio = form.bio?.value || "";
+      bodyUser.phone_number = form.phone_number?.value || "";
+    }
+
+    try {
+      const res = await fetch(endpoint, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(bodyUser)
+      });
+
+      const result = await res.json();
+
+      if (res.ok) {
+        statusMsg.textContent = "Alterações salvas!";
+        statusMsg.style.color = "green";
+
+        // Atualiza dados salvos no localStorage
+        localStorage.setItem("user", JSON.stringify(result));
+
+      } else {
+        statusMsg.textContent = result.message || "Erro ao atualizar.";
+        statusMsg.style.color = "red";
+      }
+
+    } catch (err) {
+      console.error(err);
+      statusMsg.textContent = "Erro ao atualizar.";
+      statusMsg.style.color = "red";
+    }
   });
 
 
 
-  /* ---------- Deletar usuário ---------- */
+  /* ============================================================
+     4. Deletar conta
+  ============================================================= */
+
   deleteBtn.addEventListener("click", async () => {
     const confirmar = confirm("Tem certeza que deseja deletar sua conta? Esta ação é irreversível.");
 
@@ -181,9 +216,7 @@ function carregarPerfilJS(currentUser) {
     try {
       const res = await fetch(`${API_BASE}/users/${currentUser.id}`, {
         method: "DELETE",
-        headers: {
-          "Authorization": `Bearer ${token}`
-        }
+        headers: { "Authorization": `Bearer ${token}` }
       });
 
       if (!res.ok) {
@@ -192,13 +225,12 @@ function carregarPerfilJS(currentUser) {
       }
 
       alert("Conta deletada com sucesso!");
-
       localStorage.removeItem("token");
       window.location.href = "../pages/index.html";
 
     } catch (err) {
       console.error(err);
-      alert("Erro ao tentar deletar conta.");
+      alert("Erro interno ao deletar.");
     }
   });
 }
