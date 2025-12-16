@@ -1,0 +1,141 @@
+/* -------- RESET -------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+body {
+  color: #333;
+  background: #fff; 
+  scroll-behavior: smooth;
+}
+
+/* -------- HERO -------- */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  background: #fff;
+}
+
+.hero-logo {
+  width: 500px;       
+  max-width: 25%;     
+  margin-bottom: 20px;
+}
+
+/* -------- BOTÕES -------- */
+.hero .buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 50%;
+  max-width: 250px;
+}
+
+.hero .buttons a {
+  display: block;
+  text-align: center;
+  position: relative;
+  padding: 14px 0;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+  z-index: 1;
+  overflow: hidden;
+  text-decoration: none; 
+}
+
+/* -------- BOTÃO LOGIN -------- */
+.btn-login {
+  background: #fff;
+  color: #58cc02;
+  border: none;
+}
+
+.btn-login::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 30px;
+  padding: 2px;
+  background: linear-gradient(90deg, #58cc02, #ffcc00);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+}
+
+.btn-login:hover {
+  background: #f9f9f9;
+  transform: scale(1.03);
+}
+
+/* -------- BOTÃO REGISTRAR -------- */
+.btn-register {
+  background: linear-gradient(90deg, #8e2de2, #a64dff);
+  color: #fff;
+  border: none;
+}
+
+.btn-register:hover {
+  opacity: 0.9;
+  transform: scale(1.03);
+}
+
+/* -------- SEÇÃO INFO -------- */
+.info {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  text-align: center;
+  background: #fff;
+}
+
+.info h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #4a00e0;
+}
+
+.info h3 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.info p {
+  max-width: 700px;
+  line-height: 1.6;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* -------- RESPONSIVO -------- */
+@media (max-width: 768px) {
+  .hero-logo {
+    width: 80px;
+    margin-bottom: 30px;
+  }
+
+  .hero .buttons {
+    width: 70%;
+  }
+
+  .hero .buttons a {
+    font-size: 1rem;
+    padding: 12px 0;
+  }
+}
