@@ -19,7 +19,18 @@
     <h1>BEM-VINDO DE VOLTA!</h1>
     <form id="login-form" class="login-form">
       <input type="text" name="email" placeholder="Email" required>
-      <input type="password" name="password" placeholder="Senha" required>
+      <div class="password-wrapper">
+        <input 
+          type="password" 
+          name="password" 
+          id="password" 
+          placeholder="Senha" 
+          required
+        >
+        <span id="toggle-password" class="material-symbols-outlined toggle-icon">
+          visibility
+        </span>
+      </div>
       <button type="submit" class="btn-login">ENTRAR</button>
     </form>
   </section>

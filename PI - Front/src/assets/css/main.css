@@ -331,6 +331,19 @@ body {
   border-color: var(--purple-color);
 }
 
+.form-group textarea {
+  padding: 0.75rem; /* igual ao input */
+  border: 0.0625rem solid #ccc;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  outline: none;
+  background: var(--bg-color);
+  color: var(--text-color);
+  resize: vertical; /* permite aumentar só pra baixo */
+  min-height: 100px;
+  font-family: "Arial", sans-serif;
+}
+
 /* === Ações do perfil === */
 .perfil-actions {
   margin-top: 1.125rem; /* 18px */
@@ -398,6 +411,122 @@ body {
 
 .switch input:checked + .slider { background: var(--purple-color); }
 .switch input:checked + .slider::before { transform: translateX(1.25rem); }
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: var(--bg);
+  padding: 20px;
+  width: 400px;
+  border-radius: 8px;
+}
+
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* ===============================
+   FEED DE POSTS (ESTILO TWITTER)
+================================ */
+
+.posts-header {
+  max-width: 600px;
+  margin: 0 auto 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.posts-header h2 {
+  font-size: 1.6rem;
+}
+
+#posts-list {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* CARD DO POST */
+.post-card {
+  background: var(--sidebar-bg);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.12);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(0,0,0,.18);
+}
+
+/* HEADER DO POST */
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.post-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #58cc02, #ffcc00);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+}
+
+.post-author {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-author strong {
+  font-size: 0.95rem;
+}
+
+.post-author span {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+/* CONTEÚDO */
+.post-content h3 {
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+}
+
+.post-content p {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
 
 /* -------- RESPONSIVO MOBILE -------- */
 @media (max-width: 980px) {

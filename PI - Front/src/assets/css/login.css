@@ -12,6 +12,47 @@ body {
   scroll-behavior: smooth;
 }
 
+/* WRAPPER DA SENHA */
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* INPUT DE SENHA */
+.password-wrapper input {
+  width: 100%;
+  padding: 12px 45px 12px 15px; /* espaço para o ícone */
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 30px;
+  outline: none;
+  transition: 0.3s;
+  background: #fff;
+}
+
+/* FOCO COM BORDA GRADIENTE (IGUAL AO EMAIL) */
+.password-wrapper input:focus {
+  border: 2px solid transparent;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(to right, #58cc02, #ffcc00) border-box;
+  box-shadow: 0 0 6px rgba(88, 204, 2, 0.4);
+}
+
+/* ÍCONE DE MOSTRAR SENHA */
+.toggle-icon {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  font-size: 22px;
+  color: #777;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s, transform 0.2s;
+}
+
+
 .close-btn {
   position: absolute;
   top: 100px;

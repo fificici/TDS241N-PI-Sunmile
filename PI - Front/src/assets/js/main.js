@@ -53,12 +53,20 @@ if (localStorage.getItem('darkMode') === '1') {
    SEÇÃO 2 — NAVEGAÇÃO ENTRE PÁGINAS
 ============================================================ */
 
+/* ============================================================
+   CONFIGURAÇÕES GERAIS
+============================================================ */
+
 const pageContainer = document.getElementById("page-container");
 const searchBar = document.querySelector(".search-bar");
 const links = document.querySelectorAll(".menu a");
 
 const API_BASE = "http://localhost:3000/sunmile";
 const token = localStorage.getItem("token");
+
+/* ============================================================
+   USUÁRIO LOGADO
+============================================================ */
 
 async function getCurrentUser() {
   try {
@@ -76,10 +84,30 @@ async function getCurrentUser() {
   }
 }
 
-async function carregarPagina(page) {
-  searchBar.style.display = page === "account" ? "none" : "block";
+/* ============================================================
+   MOSTRAR BOTÃO CRIAR POST (SOMENTE PRO)
+============================================================ */
 
+async function mostrarBotaoCriarPost() {
+  const btn = document.getElementById("create-post-btn");
+  if (!btn) return;
+
+  const user = await getCurrentUser();
+
+  if (user && user.role === "pro") {
+    btn.style.display = "inline-block";
+  } else {
+    btn.style.display = "none";
+  }
+}
+
+/* ============================================================
+   NAVEGAÇÃO SPA
+============================================================ */
+
+async function carregarPagina(page) {
   try {
+    /* PERFIL */
     if (page === "account") {
       const user = await getCurrentUser();
       if (!user) {
@@ -88,16 +116,32 @@ async function carregarPagina(page) {
       }
 
       const profilePage = user.role === "pro" ? "account-pro" : "account-user";
+      const res = await fetch(`../pages/${profilePage}.html`);
+      if (!res.ok) throw new Error("Erro ao carregar perfil");
 
-      const html = await fetch(`../pages/${profilePage}.html`).then(r => r.text());
-      pageContainer.innerHTML = html;
-
+      pageContainer.innerHTML = await res.text();
       carregarPerfilJS(user);
       return;
     }
 
-    const html = await fetch(`../pages/${page}.html`).then(r => r.text());
-    pageContainer.innerHTML = html;
+    /* POSTS */
+    if (page === "posts") {
+      const res = await fetch(`../pages/pro-post.html`);
+      if (!res.ok) throw new Error("Erro ao carregar posts");
+
+      pageContainer.innerHTML = await res.text();
+
+      await mostrarBotaoCriarPost();
+      carregarPosts();
+      configurarModalPost();
+      return;
+    }
+
+    /* OUTRAS PÁGINAS */
+    const res = await fetch(`../pages/${page}.html`);
+    if (!res.ok) throw new Error("Erro ao carregar página");
+
+    pageContainer.innerHTML = await res.text();
 
   } catch (err) {
     console.error(err);
@@ -105,12 +149,132 @@ async function carregarPagina(page) {
   }
 }
 
+/* ============================================================
+   LINKS DO MENU
+============================================================ */
+
 links.forEach(link => {
   link.addEventListener("click", () => {
     const page = link.getAttribute("data-page");
     carregarPagina(page);
   });
 });
+
+/* ============================================================
+   CARREGAR POSTS
+============================================================ */
+
+async function carregarPosts() {
+  const container = document.getElementById("posts-list");
+  if (!container) return;
+
+  container.innerHTML = "<p>Carregando posts...</p>";
+
+  try {
+    const res = await fetch(`${API_BASE}/pro-posts`, {
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    });
+
+    
+    console.log("STATUS /pro-posts:", res.status);
+
+    if (!res.ok) {
+      throw new Error("Erro ao buscar posts");
+    }
+
+    const posts = await res.json();
+
+    console.log("POSTS RECEBIDOS:", posts);
+
+    if (!Array.isArray(posts) || posts.length === 0) {
+      container.innerHTML = "<p>Nenhum post encontrado.</p>";
+      return;
+    }
+
+    container.innerHTML = posts.map(post => `
+      <div class="post-card">
+        <div class="post-header">
+          <strong>${post.author.name}</strong>
+          <span>@${post.author.username}</span>
+        </div>
+
+        <h3>${post.title}</h3>
+        <p>${post.content}</p>
+      </div>
+    `).join("");
+
+  } catch (err) {
+    console.error("Erro ao carregar posts:", err);
+    container.innerHTML = "<p>Erro ao carregar posts.</p>";
+  }
+}
+
+/* ============================================================
+   MODAL CRIAR POST
+============================================================ */
+
+function configurarModalPost() {
+  const modal = document.getElementById("post-modal");
+  const openBtn = document.getElementById("create-post-btn");
+  const cancelBtn = document.getElementById("cancel-post");
+  const submitBtn = document.getElementById("submit-post");
+
+  if (!modal || !openBtn || !cancelBtn || !submitBtn) return;
+
+  openBtn.onclick = () => {
+    modal.classList.remove("hidden");
+  };
+
+  cancelBtn.onclick = () => {
+    modal.classList.add("hidden");
+  };
+
+  submitBtn.onclick = async () => {
+    const titleInput = document.getElementById("post-title");
+    const contentInput = document.getElementById("post-content");
+
+    if (!titleInput || !contentInput) return;
+
+    const title = titleInput.value.trim();
+    const content = contentInput.value.trim();
+
+    if (!title || !content) {
+      alert("Preencha todos os campos");
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API_BASE}/pro-posts`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ title, content })
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        alert(err.message || "Erro ao criar post");
+        return;
+      }
+
+      titleInput.value = "";
+      contentInput.value = "";
+
+      modal.classList.add("hidden");
+      carregarPosts();
+
+    } catch (err) {
+      console.error(err);
+      alert("Erro ao publicar post");
+    }
+  };
+}
+
+
 
 
 
