@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sunmile | Cadastro Estudante</title>
+  <link rel="stylesheet" href="../assets/css/register.css">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+</head>
+<body>
+
+  <a href="register-options.html" class="close-btn">
+    <span class="material-symbols-outlined">arrow_back</span>
+  </a>
+
+  <section class="register-hero">
+    <h1>CADASTRO ESTUDANTE</h1>
+
+    <form class="register-form" enctype="multipart/form-data">
+      <input type="text" name="nome" placeholder="Nome completo" required>
+      <input type="text" name="usuario" placeholder="@ de usuário" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="date" name="nascimento" required>
+      <input type="text" name="cpf" placeholder="CPF" required>
+
+      <input type="text" name="instituicao" placeholder="Instituição de ensino" required>
+      <input type="text" name="matricula" placeholder="Número de matrícula" required>
+      <input type="password" name="senha" placeholder="Senha" required>
+
+      <label style="text-align:left; font-weight:600; margin-top:5px;">Anexar atestado de matrícula:</label>
+      <input type="file" name="atestado" accept=".pdf,.jpg,.jpeg,.png" required>
+
+      <button type="submit" class="btn-register">REGISTRAR</button>
+    </form>
+
+  </section>
+
+  <script src="../assets/js/register-pro.js"></script>
+
+</body>
+</html>
